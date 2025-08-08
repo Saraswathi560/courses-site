@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CodeCraft — Workshops & Courses Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Tailwind CDN (for quick demo) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{--accent:#0ea5a4;--accent-2:#6d28d9}
+    body{font-family: 'Open Sans', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
+    .glass{backdrop-filter: blur(6px); background: rgba(255,255,255,0.6)}
+    .hero-bg{background: linear-gradient(135deg, rgba(13,110,253,0.08), rgba(99,102,241,0.06));}
+    .card-hover:hover{transform: translateY(-8px) scale(1.01); box-shadow: 0 12px 30px rgba(16,24,40,0.08)}
+    .timeline-item{min-width:220px}
+  </style>
+</head>
+<body class="bg-gradient-to-b from-white via-slate-50 to-slate-100 text-slate-800">
+  <!-- NAV -->
+  <nav class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-lg flex items-center justify-center bg-gradient-to-r from-teal-400 to-indigo-600 text-white font-bold">CC</div>
+      <div>
+        <div class="font-bold text-lg">CodeCraft</div>
+        <div class="text-xs text-slate-500 -mt-1">Workshops • Courses • Bootcamps</div>
+      </div>
+    </div>
+    <div class="flex items-center gap-4">
+      <a href="#workshops" class="text-sm hover:underline">Workshops</a>
+      <a href="#events" class="text-sm hover:underline">Upcoming</a>
+      <a href="#testimonials" class="text-sm hover:underline">Testimonials</a>
+      <button id="ctab" class="ml-3 px-4 py-2 rounded-md bg-gradient-to-r from-teal-400 to-indigo-600 text-white font-semibold">Join Now</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="max-w-7xl mx-auto px-6 py-8 hero-bg rounded-2xl overflow-hidden">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-extrabold font-montserrat leading-tight">Level up your skills with <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-500 to-indigo-600">CodeCraft Workshops</span></h1>
+        <p class="mt-4 text-slate-600">Fast, hands-on workshops in Data Science, Machine Learning, Web Development and Programming. Small batches — industry-focused projects — certificates.</p>
+
+        <div class="mt-6 flex gap-3">
+          <button id="cta-hero" class="px-5 py-3 rounded-lg bg-gradient-to-r from-teal-500 to-indigo-600 text-white font-semibold shadow">Enroll Now</button>
+          <a href="#workshops" class="px-5 py-3 rounded-lg border border-slate-200 text-slate-700">See Workshops</a>
+        </div>
+
+        <div class="mt-6 grid grid-cols-2 gap-4 text-sm text-slate-600">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center bg-slate-100">🎓</div>
+            <div><div class="font-semibold">500+</div><div class="text-xs">Students trained</div></div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center bg-slate-100">⭐</div>
+            <div><div class="font-semibold">95%+</div><div class="text-xs">Positive feedback</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative">
+        <div class="rounded-2xl p-6 glass card-hover transition-transform duration-300">
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=0e7b1ed14f3e3f2b1a78e0d0d4c0d0a2" alt="students" class="rounded-xl w-full h-48 object-cover shadow-sm">
+          <h3 class="mt-4 font-semibold">Next cohort: Data Science Live Project</h3>
+          <p class="mt-2 text-sm text-slate-600">Work on a real-world dataset, build a complete pipeline and deploy a model.</p>
+
+          <div class="mt-4 flex items-center justify-between">
+            <div class="text-xs text-slate-500">Starts: <span class="font-semibold">Aug 15, 2025</span></div>
+            <div><button class="px-3 py-1 text-sm rounded-md border border-slate-200">Reserve Seat</button></div>
+          </div>
+        </div>
+
+        <div class="absolute -right-6 -bottom-6 w-48 p-4 rounded-2xl bg-gradient-to-tr from-white to-slate-50 shadow-lg">
+          <div class="text-xs text-slate-500">Quick Register</div>
+          <div class="mt-2 text-sm">Scan QR to open registration</div>
+          <div class="mt-3"><img src="https://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=https://example.com/register" alt="qr"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- WORKSHOPS CARDS -->
+  <section id="workshops" class="max-w-7xl mx-auto px-6 py-10">
+    <div class="flex items-center justify-between">
+      <h2 class="text-2xl font-semibold">Popular Workshops</h2>
+      <div class="text-sm text-slate-500">Choose your path • Limited seats</div>
+    </div>
+
+    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Card 1 -->
+      <div class="p-4 bg-white rounded-xl card-hover transition-transform duration-300 border">
+        <div class="flex items-start justify-between">
+          <div>
+            <h3 class="font-semibold">Data Science Bootcamp</h3>
+            <div class="text-xs text-slate-500 mt-1">12 weeks • Beginner → Advanced</div>
+          </div>
+          <div class="text-sm font-semibold text-slate-700">₹4,499</div>
+        </div>
+        <p class="mt-3 text-sm text-slate-600">Data wrangling, visualization, ML pipelines, model deployment.</p>
+        <div class="mt-4 flex items-center justify-between">
+          <div class="text-xs text-slate-500">Next: Aug 20</div>
+          <div class="flex gap-2">
+            <button onclick="window.location.href='course-details.html?course=Data%20Science%20Bootcamp'">
+  Details
+</button>
+
+            <button class="px-3 py-1 rounded-md bg-gradient-to-r from-teal-400 to-indigo-600 text-white text-sm" onclick="openEnroll('Data Science Bootcamp')">Enroll</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="p-4 bg-white rounded-xl card-hover transition-transform duration-300 border">
+        <div class="flex items-start justify-between">
+          <div>
+            <h3 class="font-semibold">Machine Learning Workshop</h3>
+            <div class="text-xs text-slate-500 mt-1">3 days intensive</div>
+          </div>
+          <div class="text-sm font-semibold text-slate-700">₹999</div>
+        </div>
+        <p class="mt-3 text-sm text-slate-600">Hands-on ML algorithms, model evaluation and feature engineering.</p>
+        <div class="mt-4 flex items-center justify-between">
+          <div class="text-xs text-slate-500">Next: Aug 25</div>
+          <div class="flex gap-2">
+             <button onclick="window.location.href='course-details.html?course=Machine%20Learning%20Bootcamp'">
+  Details
+</button>
+
+            <button class="px-3 py-1 rounded-md bg-gradient-to-r from-teal-400 to-indigo-600 text-white text-sm" onclick="openEnroll('Machine Learning Workshop')">Enroll</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="p-4 bg-white rounded-xl card-hover transition-transform duration-300 border">
+        <div class="flex items-start justify-between">
+          <div>
+            <h3 class="font-semibold">Full-Stack Web Dev</h3>
+            <div class="text-xs text-slate-500 mt-1">8 weeks • Projects</div>
+          </div>
+          <div class="text-sm font-semibold text-slate-700">₹3,499</div>
+        </div>
+        <p class="mt-3 text-sm text-slate-600">Frontend, backend, databases, deployment — build a portfolio project.</p>
+        <div class="mt-4 flex items-center justify-between">
+          <div class="text-xs text-slate-500">Next: Sep 5</div>
+          <div class="flex gap-2">
+            <button class="px-3 py-1 rounded-md text-sm border">Details</button>
+            <button class="px-3 py-1 rounded-md bg-gradient-to-r from-teal-400 to-indigo-600 text-white text-sm" onclick="openEnroll('Full-Stack Web Dev')">Enroll</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="p-4 bg-white rounded-xl card-hover transition-transform duration-300 border">
+        <div class="flex items-start justify-between">
+          <div>
+            <h3 class="font-semibold">Programming Languages (C/C++, Java, Python)</h3>
+            <div class="text-xs text-slate-500 mt-1">6 weeks • Fundamentals</div>
+          </div>
+          <div class="text-sm font-semibold text-slate-700">₹2,499</div>
+        </div>
+        <p class="mt-3 text-sm text-slate-600">Strong foundations, problem solving, interview prep.</p>
+        <div class="mt-4 flex items-center justify-between">
+          <div class="text-xs text-slate-500">Next: Sep 10</div>
+          <div class="flex gap-2">
+            <button class="px-3 py-1 rounded-md text-sm border">Details</button>
+            <button class="px-3 py-1 rounded-md bg-gradient-to-r from-teal-400 to-indigo-600 text-white text-sm" onclick="openEnroll('Programming Languages')">Enroll</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="max-w-7xl mx-auto px-6 py-8">
+    <div class="grid grid-cols-1 sm:grid-cols-4 gap-6">
+      <div class="p-6 bg-white rounded-xl text-center">
+        <div class="text-3xl font-bold" id="countStudents">0</div>
+        <div class="text-sm text-slate-500 mt-1">Students Trained</div>
+      </div>
+      <div class="p-6 bg-white rounded-xl text-center">
+        <div class="text-3xl font-bold" id="countWorkshops">0</div>
+        <div class="text-sm text-slate-500 mt-1">Workshops Conducted</div>
+      </div>
+      <div class="p-6 bg-white rounded-xl text-center">
+        <div class="text-3xl font-bold" id="countRating">0%</div>
+        <div class="text-sm text-slate-500 mt-1">Positive Feedback</div>
+      </div>
+      <div class="p-6 bg-white rounded-xl text-center">
+        <div class="text-3xl font-bold" id="countPartners">0</div>
+        <div class="text-sm text-slate-500 mt-1">Industry Partners</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE / UPCOMING -->
+  <section id="events" class="max-w-7xl mx-auto px-6 py-6">
+    <h3 class="text-xl font-semibold">Upcoming Events</h3>
+    <div class="mt-4 overflow-x-auto py-4">
+      <div class="flex gap-4 items-stretch">
+        <div class="p-4 bg-white rounded-xl shadow timeline-item">
+          <div class="text-xs text-slate-500">Aug 15, 2025</div>
+          <div class="font-semibold mt-2">Python Crash Course</div>
+          <div class="text-sm mt-2 text-slate-600">One-day hands-on session for beginners.</div>
+        </div>
+        <div class="p-4 bg-white rounded-xl shadow timeline-item">
+          <div class="text-xs text-slate-500">Aug 20, 2025</div>
+          <div class="font-semibold mt-2">Data Science Live Project</div>
+          <div class="text-sm mt-2 text-slate-600">Work on a real dataset and deploy a model.</div>
+        </div>
+        <div class="p-4 bg-white rounded-xl shadow timeline-item">
+          <div class="text-xs text-slate-500">Aug 25, 2025</div>
+          <div class="font-semibold mt-2">Machine Learning Workshop</div>
+          <div class="text-sm mt-2 text-slate-600">3-day intensive ML workshop.</div>
+        </div>
+        <div class="p-4 bg-white rounded-xl shadow timeline-item">
+          <div class="text-xs text-slate-500">Sep 05, 2025</div>
+          <div class="font-semibold mt-2">Full-Stack Project</div>
+          <div class="text-sm mt-2 text-slate-600">Build and deploy a web app.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="max-w-7xl mx-auto px-6 py-8">
+    <h3 class="text-xl font-semibold">What students say</h3>
+    <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="p-6 bg-white rounded-xl">
+        <div class="flex items-center gap-3">
+          <img src="https://randomuser.me/api/portraits/women/68.jpg" class="w-12 h-12 rounded-full">
+          <div>
+            <div class="font-semibold">Aditi</div>
+            <div class="text-xs text-slate-500">M.Tech Student</div>
+          </div>
+        </div>
+        <p class="mt-4 text-slate-600">“I went from zero coding to building my first AI model in 2 weeks. The mentors were brilliant!”</p>
+      </div>
+      <div class="p-6 bg-white rounded-xl">
+        <div class="flex items-center gap-3">
+          <img src="https://randomuser.me/api/portraits/men/65.jpg" class="w-12 h-12 rounded-full">
+          <div>
+            <div class="font-semibold">Rohit</div>
+            <div class="text-xs text-slate-500">Undergrad</div>
+          </div>
+        </div>
+        <p class="mt-4 text-slate-600">“Great projects and career guidance. I landed an internship soon after the bootcamp.”</p>
+      </div>
+      <div class="p-6 bg-white rounded-xl">
+        <div class="flex items-center gap-3">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-12 h-12 rounded-full">
+          <div>
+            <div class="font-semibold">Maya</div>
+            <div class="text-xs text-slate-500">Developer</div>
+          </div>
+        </div>
+        <p class="mt-4 text-slate-600">“The Full-Stack course helped me build a portfolio project I could show in interviews.”</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER & CONTACT -->
+  <footer class="max-w-7xl mx-auto px-6 py-8">
+    <div class="bg-white rounded-xl p-6 flex flex-col md:flex-row items-center justify-between">
+      <div>
+        <div class="font-bold">CodeCraft Workshops</div>
+        <div class="text-sm text-slate-500 mt-1">Email: hello@codecraft.example | WhatsApp: +91 90000 00000</div>
+        <div class="text-sm text-slate-500 mt-1">Follow us: Instagram • YouTube • LinkedIn</div>
+      </div>
+      <div class="mt-4 md:mt-0 text-right">
+        <div class="text-sm text-slate-500">© 2025 CodeCraft</div>
+        <div class="mt-2"><button class="px-4 py-2 rounded-md bg-gradient-to-r from-teal-400 to-indigo-600 text-white" onclick="openEnroll('General')">Register</button></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ENROLL MODAL -->
+  <div id="enrollModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 hidden">
+    <div class="bg-white rounded-xl w-11/12 md:w-2/5 p-6">
+      <div class="flex items-center justify-between">
+        <h4 class="font-semibold">Enroll — <span id="courseName">Course</span></h4>
+        <button onclick="closeEnroll()">✕</button>
+      </div>
+      <form id="enrollForm" class="mt-4">
+        <input required placeholder="Full name" name="name" class="w-full p-3 border rounded mt-2">
+        <input required placeholder="Email" name="email" type="email" class="w-full p-3 border rounded mt-2">
+        <input placeholder="Phone" name="phone" class="w-full p-3 border rounded mt-2">
+        <div class="mt-4 flex justify-end gap-2">
+          <button type="button" onclick="closeEnroll()" class="px-4 py-2 border rounded">Cancel</button>
+          <button type="submit" class="px-4 py-2 rounded bg-gradient-to-r from-teal-400 to-indigo-600 text-white">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Animated counters
+    const counters = [
+      {id:'countStudents',value:550},
+      {id:'countWorkshops',value:32},
+      {id:'countRating',value:95},
+      {id:'countPartners',value:5}
+    ];
+    counters.forEach(c=>{
+      let el = document.getElementById(c.id);
+      let start = 0;
+      const dur = 1400;
+      const step = Math.ceil(c.value/(dur/30));
+      const t = setInterval(()=>{
+        start += step;
+        if(start >= c.value){ start = c.value; clearInterval(t);} 
+        el.innerText = c.id==='countRating'? start + '%': start;
+      },30);
+    });
+
+    // Enroll modal
+    function openEnroll(course){
+      document.getElementById('courseName').innerText = course;
+      document.getElementById('enrollModal').classList.remove('hidden');
+    }
+    function closeEnroll(){ document.getElementById('enrollModal').classList.add('hidden'); }
+    document.getElementById('enrollForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      // For demo: just show a friendly message
+      alert('Thanks '+fd.get('name')+"! We've received your registration for "+document.getElementById('courseName').innerText);
+      closeEnroll();
+      e.target.reset();
+    });
+
+    // Quick hero CTA
+    document.getElementById('cta-hero').addEventListener('click', ()=> openEnroll('Data Science Live Project'));
+    document.getElementById('ctab').addEventListener('click', ()=> openEnroll('General'));
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', function(e){ e.preventDefault(); const id = this.getAttribute('href'); document.querySelector(id).scrollIntoView({behavior:'smooth'}); });
+    });
+  </script>
+</body>
+</html>
