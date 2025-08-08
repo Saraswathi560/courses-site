@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Machine Learning — Ultra Premium</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#070812;
+      --panel: rgba(255,255,255,0.04);
+      --accent1:#00f5a0;
+      --accent2:#00d9f5;
+      --accent3:#ff6ec4;
+      --glass-blur: 12px;
+      --maxw:1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#01040a 0%, #071226 100%);color:#eaf6ff;font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial;overflow-x:hidden}
+    /* full-screen canvas behind everything */
+    #three-bg{position:fixed;inset:0;z-index:0;display:block}
+    /* container */
+    .site{position:relative;z-index:2;max-width:var(--maxw);margin:32px auto;padding:28px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:18px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:54px;height:54px;border-radius:12px;background:linear-gradient(135deg,var(--accent1),var(--accent3));display:grid;place-items:center;font-weight:800;color:#041;box-shadow:0 10px 40px rgba(0,217,245,0.06)}
+    nav a{color:rgba(230,244,255,0.85);text-decoration:none;margin-left:18px;font-weight:600;font-size:14px;opacity:0.9}
+    /* hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:36px;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);backdrop-filter: blur(var(--glass-blur));border:1px solid rgba(255,255,255,0.03);box-shadow:0 20px 60px rgba(2,6,23,0.6)}
+    .hero-left h1{font-size:3.2rem;line-height:1.02;margin:0 0 12px;
+      background:linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent3));
+      background-size:200% 200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      filter:drop-shadow(0 6px 18px rgba(0,217,245,0.12));
+      animation:heroGradient 6s ease infinite}
+    @keyframes heroGradient{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    .hero p.lead{color:rgba(220,235,255,0.7);margin:0 0 18px;font-size:1.05rem}
+    .cta{display:flex;gap:12px;align-items:center}
+    .btn{
+      display:inline-flex;gap:10px;align-items:center;padding:12px 18px;border-radius:12px;border:none;cursor:pointer;font-weight:700;
+      background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#001;box-shadow:0 12px 40px rgba(0,217,245,0.12);text-decoration:none;
+      transition:transform .25s ease,box-shadow .25s ease;
+    }
+    .btn:hover{transform:translateY(-6px);box-shadow:0 28px 80px rgba(138,43,226,0.14)}
+    .btn.alt{background:transparent;color:rgba(220,235,255,0.9);border:1px solid rgba(255,255,255,0.06);box-shadow:none}
+    /* hero right visual */
+    .hero-visual{border-radius:12px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02);display:grid;gap:10px}
+    .visual-card{border-radius:8px;overflow:hidden}
+    .visual-img{width:100%;display:block;height:260px;object-fit:cover;filter:contrast(1.05) saturate(1.05)}
+    /* feature grid (tilt cards) */
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
+    .feature{padding:20px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(var(--glass-blur));transition:transform .35s cubic-bezier(.2,.9,.2,1), box-shadow .35s}
+    .feature h3{margin:0 0 8px}
+    .feature p{color:rgba(220,235,255,0.7);margin:0}
+    .feature:hover{transform:translateY(-10px);box-shadow:0 20px 50px rgba(0,217,245,0.06)}
+    /* small code */
+    pre.snip{background:#041024;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);color:#bfe}
+    footer{margin-top:40px;padding:24px 0;color:rgba(200,220,255,0.6);text-align:center}
+    /* responsiveness */
+    @media (max-width:980px){.hero{grid-template-columns:1fr;}.features{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.features{grid-template-columns:1fr}.logo{width:46px;height:46px}}
+  </style>
+</head>
+<body>
+
+  <!-- Three.js canvas background -->
+  <canvas id="three-bg"></canvas>
+
+  <div class="site" role="main">
+    <header>
+      <div class="brand">
+        <div class="logo">ML</div>
+        <div>
+          <div style="font-weight:700">Madhavi • CodeCraft</div>
+          <div style="font-size:12px;color:rgba(220,235,255,0.6)">Machine Learning • Workshops • Projects</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#courses">Courses</a>
+        <a href="#features">Features</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero" aria-label="Intro">
+      <div class="hero-left">
+        <h1 id="hero-title">Build Real-World Machine Learning — from Idea to Production</h1>
+        <p class="lead">Project-driven courses, real dataset labs, MLOps pipelines and interviews prep — curated for fast impact.</p>
+        <div class="cta">
+          <a class="btn" href="#courses">Start Learning</a>
+          <a class="btn alt" href="#contact">Get Mentorship</a>
+        </div>
+
+        <div style="margin-top:18px">
+          <small style="color:rgba(200,220,255,0.6)">Quick snippet</small>
+          <pre class="snip">from sklearn.ensemble import RandomForestClassifier
+clf = RandomForestClassifier(n_estimators=150)
+clf.fit(X_train, y_train)
+print(clf.score(X_test, y_test))</pre>
+        </div>
+      </div>
+
+      <aside class="hero-visual" aria-hidden="true">
+        <div class="visual-card">
+          <img class="visual-img" src="C:/Users/Admin/OneDrive/Desktop/Youtube videos/programming dashboards/mlweb.jpg" alt="AI Visual">
+        </div>
+        <div style="display:flex;gap:10px">
+          <div style="flex:1;padding:10px;border-radius:10px;background:linear-gradient(90deg,rgba(255,255,255,0.01),transparent);border:1px solid rgba(255,255,255,0.02)">
+            <strong>Featured</strong>
+            <div style="color:rgba(200,220,255,0.7);font-size:13px">Sentiment Transformer • FastAPI</div>
+          </div>
+          <div style="width:84px;padding:10px;border-radius:10px;background:linear-gradient(90deg,rgba(255,255,255,0.01),transparent);border:1px solid rgba(255,255,255,0.02);text-align:center">
+            <div style="font-size:18px;font-weight:700">45</div>
+            <div style="font-size:11px;color:rgba(200,220,255,0.7)">Projects</div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="features" style="margin-top:28px">
+      <h2 style="text-align:center;margin-bottom:18px">What you'll build</h2>
+      <div class="features" id="tilt-wrap">
+        <div class="feature" data-tilt>
+          <h3>End-to-end Pipelines</h3>
+          <p>Data ingestion → training → deployment with monitoring.</p>
+        </div>
+        <div class="feature" data-tilt>
+          <h3>Deep Learning Projects</h3>
+          <p>CNNs, ResNets, Vision Transformers and real datasets.</p>
+        </div>
+        <div class="feature" data-tilt>
+          <h3>NLP & Transformers</h3>
+          <p>Fine-tuning, RAG, and building chat-style assistants.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="courses" style="margin-top:28px">
+      <h2 style="text-align:center;margin-bottom:18px">Courses</h2>
+      <div class="features">
+        <div class="feature" data-tilt>
+          <h3>Foundations</h3>
+          <p>Math, statistics and classical ML.</p>
+        </div>
+        <div class="feature" data-tilt>
+          <h3>Deep Learning</h3>
+          <p>Hands-on CNN & sequence models.</p>
+        </div>
+        <div class="feature" data-tilt>
+          <h3>MLOps</h3>
+          <p>CI/CD, model serving, monitoring & infra.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer id="contact">
+      <div style="font-weight:700">Join the ML Workshop</div>
+      <div style="color:rgba(200,220,255,0.7);margin:8px 0 14px">Live sessions, recordings, and project reviews.</div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <a class="btn" href="#">Sign Up</a>
+        <a class="btn alt" href="#">Contact</a>
+      </div>
+      <div style="margin-top:18px;color:rgba(200,220,255,0.6)">© <span id="year"></span> Madhavi — CodeCraft</div>
+    </footer>
+  </div>
+
+  <!-- Libraries from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.3/dist/vanilla-tilt.min.js"></script>
+  <script src="https://unpkg.com/three@0.156.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/three@0.156.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.1/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.1/ScrollTrigger.min.js"></script>
+
+  <script>
+  // === Basic housekeeping ===
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // === Vanilla Tilt for cards (parallax tilt) ===
+  VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+    max: 12, speed: 400, glare: true, "max-glare": 0.12, scale: 1.02
+  });
+
+  // === GSAP scroll animations ===
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.from("#hero-title", {y: 30, opacity:0, duration:0.9, ease:"power3.out"});
+  gsap.from(".hero p.lead", {y: 18, opacity:0, duration:0.8, delay:0.12});
+  gsap.from(".btn", {y: 12, opacity:0, duration:0.6, stagger:0.08, delay:0.18});
+
+  gsap.utils.toArray(".feature").forEach((el, i) => {
+    gsap.from(el, {
+      y: 30, opacity: 0, duration: 0.7, delay: 0.05 * i,
+      scrollTrigger: {trigger: el, start: "top 85%"}
+    });
+  });
+
+  // === THREE.JS: neural points + connecting lines background ===
+  (function(){
+    const canvas = document.getElementById('three-bg');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.domElement.style.display = 'block';
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.1, 2000);
+    camera.position.z = 120;
+
+    // responsive: reduce particle count on small screens
+    const isMobile = window.innerWidth < 800;
+    const POINTS = isMobile ? 140 : 420;
+    const RANGE = 120;
+
+    // Points geometry
+    const positions = new Float32Array(POINTS * 3);
+    const velocities = new Float32Array(POINTS * 3);
+    for(let i=0;i<POINTS;i++){
+      const i3 = i * 3;
+      positions[i3] = (Math.random() - 0.5) * RANGE * 2;
+      positions[i3+1] = (Math.random() - 0.5) * RANGE * 1.2;
+      positions[i3+2] = (Math.random() - 0.5) * RANGE * 2;
+      velocities[i3] = (Math.random() - 0.5) * 0.12;
+      velocities[i3+1] = (Math.random() - 0.5) * 0.12;
+      velocities[i3+2] = (Math.random() - 0.5) * 0.12;
+    }
+
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    const mat = new THREE.PointsMaterial({ size: isMobile ? 1.8 : 2.6, color: 0x00d9f5, transparent:true, opacity:0.85 });
+    const points = new THREE.Points(geo, mat);
+    scene.add(points);
+
+    // lines: use a dynamic LineSegments to draw connections under a distance threshold
+    const maxConnections = 8;
+    const linePositions = new Float32Array(POINTS * maxConnections * 3);
+    const lineGeo = new THREE.BufferGeometry();
+    lineGeo.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+    const lineMat = new THREE.LineBasicMaterial({ color:0x00f5a0, transparent:true, opacity:0.08 });
+    const lines = new THREE.LineSegments(lineGeo, lineMat);
+    scene.add(lines);
+
+    // subtle rotation group
+    const group = new THREE.Group();
+    group.add(points);
+    group.add(lines);
+    scene.add(group);
+
+    // mouse interactive attractor
+    const mouse = new THREE.Vector2(9999, 9999);
+    window.addEventListener('mousemove', e => {
+      mouse.x = (e.clientX / innerWidth) * 2 - 1;
+      mouse.y = -(e.clientY / innerHeight) * 2 + 1;
+    });
+
+    // animation loop
+    function animate() {
+      requestAnimationFrame(animate);
+
+      // update positions slightly and compute line connections
+      const pos = geo.attributes.position.array;
+      let lp = 0;
+      for(let i=0;i<POINTS;i++){
+        const i3 = i*3;
+        pos[i3] += velocities[i3] * (Math.sin((i+i3) * 0.001) + 0.6);
+        pos[i3+1] += velocities[i3+1] * (Math.cos((i+i3) * 0.001) + 0.6);
+        pos[i3+2] += velocities[i3+2] * (Math.sin((i+i3) * 0.001) + 0.6);
+
+        // mouse attraction (subtle)
+        const dx = pos[i3] - mouse.x * RANGE;
+        const dy = pos[i3+1] - mouse.y * RANGE;
+        const dist2 = dx*dx + dy*dy;
+        if(dist2 < 6000) {
+          pos[i3] += dx * 0.0008;
+          pos[i3+1] += dy * 0.0008;
+        }
+
+        // connect to nearest neighbors (simple O(N^2) but points small)
+        for(let j=i+1;j<POINTS && lp < linePositions.length/3; j++){
+          const j3 = j*3;
+          const dx2 = pos[i3] - pos[j3];
+          const dy2 = pos[i3+1] - pos[j3+1];
+          const dz2 = pos[i3+2] - pos[j3+2];
+          const d2 = dx2*dx2 + dy2*dy2 + dz2*dz2;
+          if(d2 < (isMobile ? 9000 : 7200)) {
+            linePositions[lp*3] = pos[i3];
+            linePositions[lp*3+1] = pos[i3+1];
+            linePositions[lp*3+2] = pos[i3+2];
+            lp++;
+            linePositions[lp*3] = pos[j3];
+            linePositions[lp*3+1] = pos[j3+1];
+            linePositions[lp*3+2] = pos[j3+2];
+            lp++;
+          }
+          // limit rendering to keep perf stable
+          if(lp > POINTS * 6) break;
+        }
+      }
+
+      geo.attributes.position.needsUpdate = true;
+      // update line buffer length used
+      const used = Math.max(1, Math.min(lp*3, linePositions.length));
+      lineGeo.setDrawRange(0, used/3);
+      lineGeo.attributes.position.array.set(linePositions);
+      lineGeo.attributes.position.needsUpdate = true;
+
+      group.rotation.y += 0.0007;
+      group.rotation.x += 0.0004;
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // responsive resize
+    window.addEventListener('resize', ()=> {
+      camera.aspect = innerWidth / innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth, innerHeight);
+    });
+
+    // pause heavy animation on low-power/mobile heuristics
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(prefersReducedMotion) {
+      renderer.setAnimationLoop(null);
+      // set static faint background color as fallback
+      renderer.domElement.style.opacity = '0.6';
+    }
+  })();
+  </script>
+</body>
+</html>
